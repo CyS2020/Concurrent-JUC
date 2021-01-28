@@ -11,4 +11,4 @@
 - 如果线程数等于(或大于)corePoolSize但小于maxPoolSize，则将任务放入队列
 - 如果队列已满，并且线程数小于maxPoolSize，则创建一个新的线程来运行任务
 - 如果队列已满，并且线程数大于或等于maxPoolSize，则拒绝该任务
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B7%BB%E5%8A%A0%E7%BA%BF%E7%A8%8B%E8%A7%84%E5%88%99%20%20.png" width = "600" height = "300" alt="主内存和本地内存的图示2" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B7%BB%E5%8A%A0%E7%BA%BF%E7%A8%8B%E8%A7%84%E5%88%99%20%20.png" width = "600" height = "250" alt="主内存和本地内存的图示2" align=center /><br/>
