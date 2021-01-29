@@ -18,4 +18,5 @@
 - 有界队列：ArrayBlockingQueue
 #### 默认线程池
 - newFixedThreadPool：由于传入的LinkedBlockingQueue是没有容量上限的，所以当请求数量越来越多无法及时处理，占用大量内存造成OOM
-- newSingleThreadPool：
+- newSingleThreadPool：和上方原理一样，只不过把线程数直接设置为1，所以存在同样的问题，请求堆积时占用大量内存会发生OOM
+- newCachedThreadPool：
