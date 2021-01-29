@@ -19,4 +19,9 @@
 #### 默认线程池
 - newFixedThreadPool：由于传入的LinkedBlockingQueue是没有容量上限的，所以当请求数量越来越多无法及时处理，占用大量内存造成OOM
 - newSingleThreadPool：和上方原理一样，只不过把线程数直接设置为1，所以存在同样的问题，请求堆积时占用大量内存会发生OOM
-- newCachedThreadPool：
+- newCachedThreadPool：弊端在于第二个参数最大线程数设置为Integer.MAX_VALUE，这可能回导致创建非常多的线程导致OOM，使用直接交接队列
+- newScheduledThreadPool：支持定时及周期性任务执行的线程池，最大线程数为Integer.MAX_VALUE，使用DelayedWorkQueue队列
+#### 线程池线程数设置多少合适？
+- CPU密集型(加密、计算hash等)：最佳线程数为CPU核心数的1-2倍左右
+- 耗时IO型(读写数据库、文件、网络读写等)：最佳线程数一般会大于cpu核心数的很多倍，压测为准
+- 线程数 = CPU核心数 * (1 + 平均等待时间/平均工作时间)
