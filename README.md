@@ -72,6 +72,9 @@
 - 高效利用内存、节省开销
 - 免去传参的繁琐
 #### ThreadLocal基本原理
+- ThreadLocalMap保存在Thread中的，即ThreadLocal与其保存的数据均存放在线程中
+- get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，
+把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="主内存和本地内存的图示2" align=center /><br/>
 #### ThreadLocal主要方法
 - T initialValue()：初始化
