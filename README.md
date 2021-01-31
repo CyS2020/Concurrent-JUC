@@ -54,3 +54,19 @@
 - STOP：不接受新任务，也不处理排队任务，中断正在进行的任务
 - TIDYING：所有任务都已终止，workerCount为零时线程会切换到该状态，并允许terminate()钩子方法
 - TERMINATED：terminate()运行完成
+### ThreadLocal
+#### 使用场景
+- 每个线程需要一个独享的对象(通常是工具类，典型需要使用的类有SimpleDateFormat和Random)--重写initialValue()
+  - 在ThreadLocal第一次get的时候把对象给初始化出来，对象的初始化时机由我们控制
+- 每个线程内需要保存全局变量(例如在拦截器中获取用户信息)，可以让不同的方法直接使用，避免参数传递的麻烦--调用set()
+  - ThreadLocal里的对象的生成时机不由我们随意控制，用ThreadLocal.set()直接放到ThreadLocal中去以便后续使用
+#### 两个作用
+- 让某个需要用到的对象在线程间隔离(每个线程都有自己独立的对象)
+- 在任何方法中都可以轻松获取到该对象，调用ThreadLocal.get()方法
+#### ThreadLocal带来的好处
+- 达到线程安全
+- 不需要加锁，提高执行效率
+- 高效利用内存、节省开销
+- 免去传参的繁琐
+#### ThreadLocal原理
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "250" alt="主内存和本地内存的图示2" align=center /><br/>
