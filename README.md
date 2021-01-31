@@ -73,11 +73,22 @@
 - 免去传参的繁琐
 #### ThreadLocal基本原理
 - ThreadLocalMap保存在Thread中的，即ThreadLocal与其保存的数据均存放在线程中
-- get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，
-把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value
+- ThreadLocalMap解决hash冲突的方式是：线性探测法
+- get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="主内存和本地内存的图示2" align=center /><br/>
 #### ThreadLocal主要方法
 - T initialValue()：初始化
 - void set(T t)：为线程设置一个新值
 - T get()：得到这个线程对应的value，如果首次调用则调用initialValue来得到这个值
 - void remove()：删除对应这个线程的值
+#### ThreadLocal注意点
+- 内存泄漏
+  - 调用链：Thread -> ThreadLocalMap -> Entry(key为null) -> Value
+- 空指针异常
+  - 在get之前如果不进行初始化，会返回null，注意基本数据类型的装箱拆箱导致空指针异常
+- 共享对象
+  - 如果每个线程中ThreadLocal.set()的数据是多线程共享的同一个对象，那么多个线程的ThreadLocal.get()取得的数据还是共享对象本身，还是有并发访问的问题，例如不应该在ThreadLocal中放入静态的对象
+- 如果可以不使用ThreadLocal就能解决问题，就不要强行使用ThreadLocal
+- 优先使用框架的支持，而不是自己创造
+  - 在Spring中，如果可以使用RequsetContextHolder，那么就不需要自己维护ThreadLocal
+- 每次http请求都对应一个线程，线程之间互相隔离，这就是ThreadLocal的典型应用场景
