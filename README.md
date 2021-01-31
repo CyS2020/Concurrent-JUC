@@ -58,6 +58,9 @@
 #### 使用场景
 - 每个线程需要一个独享的对象(通常是工具类，典型需要使用的类有SimpleDateFormat和Random)--重写initialValue()
   - 在ThreadLocal第一次get的时候把对象给初始化出来，对象的初始化时机由我们控制
+  - initialValue()：该方法返回当前线程对应的"初始值"，这是一个延迟加载的方法，调用get()的时候，才会触发
+  - 当线程第一次使用get方法访问变量时，将调用此方法，除非线程先前调用了set方法，这样就不会为线程调用initialValue方法
+  - 通常每个线程最多调用一次此方法，但如果调用了remove()后，再调用get()，则可以再次调用此方法
 - 每个线程内需要保存全局变量(例如在拦截器中获取用户信息)，可以让不同的方法直接使用，避免参数传递的麻烦--调用set()
   - ThreadLocal里的对象的生成时机不由我们随意控制，用ThreadLocal.set()直接放到ThreadLocal中去以便后续使用
 #### 两个作用
@@ -68,5 +71,10 @@
 - 不需要加锁，提高执行效率
 - 高效利用内存、节省开销
 - 免去传参的繁琐
-#### ThreadLocal原理
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "250" alt="主内存和本地内存的图示2" align=center /><br/>
+#### ThreadLocal基本原理
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="主内存和本地内存的图示2" align=center /><br/>
+#### ThreadLocal主要方法
+- T initialValue()：初始化
+- void set(T t)：为线程设置一个新值
+- T get()：得到这个线程对应的value，如果首次调用则调用initialValue来得到这个值
+- void remove()：删除对应这个线程的值
