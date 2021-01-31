@@ -92,3 +92,9 @@
 - 优先使用框架的支持，而不是自己创造
   - 在Spring中，如果可以使用RequsetContextHolder，那么就不需要自己维护ThreadLocal
 - 每次http请求都对应一个线程，线程之间互相隔离，这就是ThreadLocal的典型应用场景
+### 锁(Lock)
+#### Lock主要方法介绍
+- lock()：
+- tryLock()：
+- tryLock(long time, TimeUnit unit)：
+- lockInterruptibly()：
