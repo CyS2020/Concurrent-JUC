@@ -21,7 +21,36 @@
 - newSingleThreadPool：和上方原理一样，只不过把线程数直接设置为1，所以存在同样的问题，请求堆积时占用大量内存会发生OOM
 - newCachedThreadPool：弊端在于第二个参数最大线程数设置为Integer.MAX_VALUE，这可能回导致创建非常多的线程导致OOM，使用直接交接队列
 - newScheduledThreadPool：支持定时及周期性任务执行的线程池，最大线程数为Integer.MAX_VALUE，使用DelayedWorkQueue队列
+- workStealingPool：是jdk1.8加入的，线程中的任务有子任务的时候，拥有窃取能力--窃取子任务队列中的任务
 #### 线程池线程数设置多少合适？
 - CPU密集型(加密、计算hash等)：最佳线程数为CPU核心数的1-2倍左右
-- 耗时IO型(读写数据库、文件、网络读写等)：最佳线程数一般会大于cpu核心数的很多倍，压测为准
+- 耗时IO型(读写数据库、文件、网络读写等)：最佳线程数一般会大于cpu核心数的很多倍，以压测为准
 - 线程数 = CPU核心数 * (1 + 平均等待时间/平均工作时间)
+#### 停止线程池的正确方法
+- shutdown：阻止新来的任务提交，对已经提交了的任务不会产生任何影响
+- isShutdown：当调用shutdown()或shutdownNow()方法后返回为true
+- isTerminated：isTerminated当调用shutdown()方法后，并且所有提交的任务完成后返回为true
+- awaitTermination：当等待超过设定时间时，会监测ExecutorService是否已经关闭，若关闭则返回true，否则返回false
+- shutdownNow：阻止新来的任务提交，同时会中断当前正在运行的线程，即workers中的线程，返回workQueue中的任务
+#### 线程池拒绝任务时机
+- 当Executor关闭时，提交新任务会被拒绝
+- 以及当Executor对最大线程和工作队列容量使用有限边界并且已经饱和时
+#### 四种拒绝策略
+- AbortPolicy：抛出异常
+- DiscardPolicy：默默丢弃
+- DiscardOldestPolicy：丢弃最老的任务
+- CallerRunsPolicy：提交任务的线程负责执行
+#### 钩子方法
+- 暂停线程池、每个任务执行前后、日志与统计
+#### 线程池组成部分
+- 线程池管理器
+- 工作线程
+- 任务队列
+- 任务接口(Task)
+- Executor -> ExecutorService -> AbstractExecutorService -> ThreadPoolExecutor
+#### 线程池状态
+- RUNNING：接收新任务并处理排队任务
+- SHUTDOWN：不接受新任务，但处理排队任务
+- STOP：不接受新任务，也不处理排队任务，中断正在进行的任务
+- TIDYING：所有任务都已终止，workerCount为零时线程会切换到该状态，并允许terminate()钩子方法
+- TERMINATED：terminate()运行完成
