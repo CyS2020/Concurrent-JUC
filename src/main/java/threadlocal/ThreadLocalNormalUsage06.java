@@ -26,6 +26,11 @@ class Service2{
     public void process(){
         User user = UserContextHolder.holder.get();
         System.out.println("Service2拿到用户名" + user.name);
+        // 调用remove方法，会清除User
+        UserContextHolder.holder.remove();
+        // 调用set方法，重新赋值
+        user = new User("王姐");
+        UserContextHolder.holder.set(user);
         new Service3().process();
     }
 }
