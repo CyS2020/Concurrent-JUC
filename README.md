@@ -74,7 +74,7 @@
 #### ThreadLocal基本原理
 - ThreadLocalMap保存在Thread中的，即ThreadLocal与其保存的数据均存放在线程中
 - ThreadLocalMap解决hash冲突的方式是：线性探测法
-- get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value
+- get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="主内存和本地内存的图示2" align=center /><br/>
 #### ThreadLocal主要方法
 - T initialValue()：初始化
@@ -92,3 +92,23 @@
 - 优先使用框架的支持，而不是自己创造
   - 在Spring中，如果可以使用RequsetContextHolder，那么就不需要自己维护ThreadLocal
 - 每次http请求都对应一个线程，线程之间互相隔离，这就是ThreadLocal的典型应用场景
+### 锁(Lock)
+#### Lock接口方法
+- lock()：就是最普通的锁如果锁已被其他线程获取，则进行等待
+  - 不会像synchronized一样在异常时自动释放锁，在finally中释放锁，保证异常时锁一定被释放
+  - lock()方法不能被中断，会有很大隐患，一旦陷入死锁lock()就会陷入永久等待
+- tryLock()：用来尝试获取锁，如果当前锁没有被其他线程占用，则获取成功返回true，失败返回false
+  - 相比lock，我们可以根据是否获取到锁来决定后续程序的行为，该方法会立即返回即便拿不到锁时也不会一直在那等
+- tryLock(long time, TimeUnit unit)：设置超时时间，在设定时间内拿到锁返回true，时间到仍没拿到则返回false
+- lockInterruptibly()：相当于tryLock(long time, TimeUnit unit)把超时时间设置为无限，等待锁过程可被中断
+- unlock()：解锁方法，按照规范进行释放，try - finally
+#### 锁的分类
+- 线程要不要锁住同步资源：悲观锁(互斥同步锁)--乐观锁(非互斥同步锁)
+  - 互斥同步锁劣势：阻塞和唤醒带来的性能劣势、永久阻塞、优先级反转
+  - Java中悲观锁实现就是synchronized和Lock相关类
+  - 乐观锁在更新过程中去对比在我修改期间数据有没有被改变过，一般利用CAS算法实现
+- 多线程能否共享一把锁：共享锁--独占锁
+- 多线程竞争时，是否排队：公平锁--非公平锁
+- 同一个线程是否可以重复获取一把锁：可重入锁--不可重入锁
+- 是否可中断：可中断锁--非可中断锁
+- 等锁过程：自旋锁--非自旋锁
