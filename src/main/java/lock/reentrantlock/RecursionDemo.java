@@ -9,7 +9,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class RecursionDemo {
 
-    private static ReentrantLock lock = new ReentrantLock();
+    private static final ReentrantLock lock = new ReentrantLock();
 
     public static void main(String[] args) {
         accessResource();
