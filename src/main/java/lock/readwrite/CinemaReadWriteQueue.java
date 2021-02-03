@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author: CyS2020
  * @date: 2021/2/3
- * 描述：演示读写锁
+ * 描述：头结点为写锁是线程5不能插队
  */
 public class CinemaReadWriteQueue {
 
