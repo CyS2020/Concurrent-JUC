@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author: CyS2020
  * @date: 2021/2/3
- * 描述：演示公平与非公平策略的读写锁
+ * 描述：演示非公平锁的读锁在等待队列头节点为尝试获取读锁时可以插队，头结点为尝试获取写锁时是不允许插队
  */
 public class NonfairBargeDemo {
 

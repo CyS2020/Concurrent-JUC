@@ -5,7 +5,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * @author: CyS2020
  * @date: 2021/2/3
- * 描述：演示读写锁
+ * 描述：演示读写锁，读锁可以一起加锁解锁，写锁要一个一个来
  */
 public class CinemaReadWrite {
 
