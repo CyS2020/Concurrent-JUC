@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class LockIncorruptibly implements Runnable {
 
-    private Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     public static void main(String[] args) throws InterruptedException {
         LockIncorruptibly lockIncorruptibly = new LockIncorruptibly();

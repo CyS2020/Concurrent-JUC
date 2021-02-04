@@ -1,6 +1,5 @@
 package lock.lock;
 
-import java.lang.ref.PhantomReference;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Lock;
