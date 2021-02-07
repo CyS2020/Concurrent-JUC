@@ -142,4 +142,19 @@
 #### 相比于锁的特点
 - 粒度更细：原子变量可以吧竞争范围缩小到变量级别，这是我们可以获得的最细粒度的情况，通常锁粒度要大于变量粒度
 - 效率更高：通常使用原子类的效率会比使用锁的效率更高，除了高度竞争的情况
-- 
+#### 六类原子类
+- Atomic* 基本类型原子类：AtomicInteger、AtomicLong、AtomicBoolean
+- Atomic* Array 数组类型原子类：AtomicIntegerArray、AtomicLongArray、AtomicReferenceArray
+- Atomic* Reference 引用类型原子类：AtomicReferenece、AtomicStampedReference、AtomicMarkableReference
+- Atomic* FieldUpdater 升级类型原子类：AtomicIntegerFieldUpdater、AtomicLongFieldUpdater、AtomicReferenceFieldUpdater
+  - 所升级的类中的成员变量的可见性不能是private，不能升级静态变量static修饰的
+- Adder累加器：LongAdder、DoubleAdder
+  - 分段累加，内部有一个base变量和一个Cell[]数组共同参与计数
+  - base变量：竞争不激烈，直接累加到该变量上
+  - Cell[]数组：竞争激烈，各个线程分散累加到自己的槽Cell[i]中
+  - LongAdder适合场景是统计求和计数的场景
+- Accumulator累加器：LongAccumulator、DoubleAccumulator
+  - Accumulator适合需要大量计算，且需要并行计算；计算顺序不能有要求
+#### CAS原理
+- CAS有三个操作数：内存值V、预期值A、要修改的值B，当且仅当预期值A和内存值V相同时，才将内存值V修改为B，否则什么都不做返回现在的V值
+- 缺点：ABA问题-添加版本号、自旋时间过长
