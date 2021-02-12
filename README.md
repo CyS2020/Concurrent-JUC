@@ -176,8 +176,15 @@
 - 方法里新建的局部变量，实际上是存储在每个线程私有的栈空间，而每个栈空间是不能被其他线程所访问到的
   所以不会有线程安全问题。这就是著名的"栈封闭"技术，是"线程封闭"技术的一种情况
 ### 并发容器
+#### HashMap线程不安全
+- 同时put碰撞导致数据丢失
+- 同时put扩容导致数据丢失
+- 死循环造成的CPU利用率100%，多线程同时扩容的时候造成循环链表导致的1.7
+- 容器迭代时不允许修改(add、remove)
+- Map中要求的key为不可变对象
 #### ConcurrentHashMap
 - 线程安全的HashMap
+- 组合方法有可能不是线程安全的，一使用Synchronized来枷锁，二使用自带的组合操作replace、putIfAbsent等
 #### CopyOnWriteArrayList
 - 线程安全的ArrayList
 #### BlockingQueue
