@@ -180,7 +180,7 @@
 - 同时put碰撞导致数据丢失
 - 同时put扩容导致数据丢失
 - 死循环造成的CPU利用率100%，多线程同时扩容的时候造成循环链表导致的1.7
-- 容器迭代时不允许修改(add、remove)
+- 集合迭代时不允许修改(add、put、remove等)，集合大小发生变化会引发ConcurrentModificationException异常
 - Map中要求的key为不可变对象
 #### ConcurrentHashMap
 - 线程安全的HashMap
