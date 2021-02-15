@@ -180,7 +180,7 @@
 - 同时put碰撞导致数据丢失
 - 同时put扩容导致数据丢失
 - 死循环造成的CPU利用率100%，多线程同时扩容的时候造成循环链表导致的1.7
-- 集合迭代时不允许修改(add、put、remove等)，集合大小发生变化会引发ConcurrentModificationException异常
+- 常规集合迭代时不允许修改(add、put、remove等)，集合大小发生变化会引发ConcurrentModificationException异常
 - Map中要求的key为不可变对象
 #### ConcurrentHashMap
 - 线程安全的HashMap
@@ -188,11 +188,12 @@
 #### CopyOnWriteArrayList
 - 线程安全的ArrayList
 - Vector和SynchronizedList的锁力度太大，并发效率低，并且迭代的时候无法编辑
-- Copy-On-Write并发容器还包括CopyOnWriteArraySet，用来代替同步Set
+- Copy-On-Write表示写的时候Copy一份数据。并发容器还包括CopyOnWriteArraySet，用来代替同步Set
 - 适用场景：读操作可以尽可能地快，而写操作即使慢一些也没有太大关系
   - 读多写少：黑名单、白名单，每日更新
   - 监听器：迭代操作远多于修改操作
-- 读取完全不用加锁，写入也不会阻塞读的操作，只有写入与写入之间需要进行同步等待
+- 读取完全不用加锁，写入也不会阻塞读的操作，只有写入与写入之间需要进行同步等待--创建副本，读写分离 + "不可变"原理
+- 迭代的数据可能会过期，迭代时可以进行修改(add、put、remove)，不会引发ConcurrentModificationException异常
 #### BlockingQueue
 - 这是一个接口，表示阻塞队列，非常适合用于作为数据共享的通道
 #### ConcurrentLinkedQueue
