@@ -187,6 +187,12 @@
 - 组合方法有可能不是线程安全的，一使用Synchronized来枷锁，二使用自带的组合操作replace、putIfAbsent等
 #### CopyOnWriteArrayList
 - 线程安全的ArrayList
+- Vector和SynchronizedList的锁力度太大，并发效率低，并且迭代的时候无法编辑
+- Copy-On-Write并发容器还包括CopyOnWriteArraySet，用来代替同步Set
+- 适用场景：读操作可以尽可能地快，而写操作即使慢一些也没有太大关系
+  - 读多写少：黑名单、白名单，每日更新
+  - 监听器：迭代操作远多于修改操作
+- 读取完全不用加锁，写入也不会阻塞读的操作，只有写入与写入之间需要进行同步等待
 #### BlockingQueue
 - 这是一个接口，表示阻塞队列，非常适合用于作为数据共享的通道
 #### ConcurrentLinkedQueue
