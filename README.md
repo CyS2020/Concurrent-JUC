@@ -11,7 +11,7 @@
 - 如果线程数等于(或大于)corePoolSize但小于maxPoolSize，则将任务放入队列
 - 如果队列已满，并且线程数小于maxPoolSize，则创建一个新的线程来运行任务
 - 如果队列已满，并且线程数大于或等于maxPoolSize，则拒绝该任务
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B7%BB%E5%8A%A0%E7%BA%BF%E7%A8%8B%E8%A7%84%E5%88%99%20%20.png" width = "600" height = "250" alt="主内存和本地内存的图示2" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E6%B7%BB%E5%8A%A0%E7%BA%BF%E7%A8%8B%E8%A7%84%E5%88%99%20%20.png" width = "600" height = "250" alt="线程池添加规则" align=center /><br/>
 #### 常见队列类型
 - 直接交接：SynchronousQueue
 - 无界队列：LinkedBlockingQueue
@@ -75,7 +75,7 @@
 - ThreadLocalMap保存在Thread中的，即ThreadLocal与其保存的数据均存放在线程中
 - ThreadLocalMap解决hash冲突的方式是：线性探测法
 - get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value<br/>
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="主内存和本地内存的图示2" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="ThreadLocol原理图" align=center /><br/>
 #### ThreadLocal主要方法
 - T initialValue()：初始化
 - void set(T t)：为线程设置一个新值
