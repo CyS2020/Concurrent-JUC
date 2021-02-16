@@ -186,8 +186,8 @@
 - 线程安全的HashMap
 - 组合方法有可能不是线程安全的，一使用Synchronized来枷锁，二使用自带的组合操作replace、putIfAbsent等
 - 数据结构如图所示1.7 -> 1.8
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.7%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%202.png" width = "600" height = "300" alt="JDK1.7的ConcurrentHashMap实现和分析" align=left /><br/>
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.8%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%201.png" width = "600" height = "300" alt="JDK1.8的ConcurrentHashMap实现和分析" align=right /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.7%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%202.png" width = "400" height = "300" alt="JDK1.7的ConcurrentHashMap实现和分析" align=left />
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.8%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%201.png" width = "400" height = "300" alt="JDK1.8的ConcurrentHashMap实现和分析" align=right /><br/>
 #### CopyOnWriteArrayList
 - 线程安全的ArrayList
 - Vector和SynchronizedList的锁力度太大，并发效率低，并且迭代的时候无法编辑
