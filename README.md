@@ -186,6 +186,8 @@
 - 线程安全的HashMap
 - 组合方法有可能不是线程安全的，一使用Synchronized来枷锁，二使用自带的组合操作replace、putIfAbsent等
 - 数据结构如图所示1.7 -> 1.8
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.7%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%202.png" width = "600" height = "300" alt="JDK1.7的ConcurrentHashMap实现和分析" align=left />
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.8%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%201.png" width = "600" height = "300" alt="JDK1.8的ConcurrentHashMap实现和分析" align=right /><br/>
 #### CopyOnWriteArrayList
 - 线程安全的ArrayList
 - Vector和SynchronizedList的锁力度太大，并发效率低，并且迭代的时候无法编辑
@@ -201,6 +203,7 @@
 #### BlockingQueue
 - 这是一个接口，表示阻塞队列，非常适合用于作为数据共享的通道
 - 各并发队列关系图
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%20.png" width = "600" height = "300" alt="阻塞队列与非阻塞队列" align=center /><br/>
 - 阻塞队列是具有阻塞功能的队列，阻塞队列的一端是给生产者放数据用的，另一端是给消费者拿数据用的；阻塞队列是线程安全的
 - 阻塞功能：take()方法若无数据则阻塞直到有数据，put()方法若队列已满则阻塞直到有空闲空间
 - 主要方法：put-take阻塞；add-remove-element异常；offer-poll-peek返回；
