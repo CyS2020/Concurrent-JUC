@@ -184,8 +184,10 @@
 - Map中要求的key为不可变对象
 #### ConcurrentHashMap
 - 线程安全的HashMap
-- 组合方法有可能不是线程安全的，一使用Synchronized来枷锁，二使用自带的组合操作replace、putIfAbsent等
-- 数据结构如图所示1.7 -> 1.8
+- 组合方法有可能不是线程安全的，一使用Synchronized来加锁，二使用自带的组合操作replace、putIfAbsent等
+- 为什么是8来转为红黑树：红黑树存贮空间是链表的两倍，正常情况下链表的长度不会达到8(概率极低)，如果出现了说明哈希算法有问题
+- 数据结构如图所示1.7 -> 1.8<br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.7%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%202.png" width = "400" height = "300" alt="JDK1.7的ConcurrentHashMap实现和分析" align=center /><img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/JDK1.8%E7%9A%84ConcurrentHashMap%E5%AE%9E%E7%8E%B0%E5%92%8C%E5%88%86%E6%9E%90%201.png" width = "400" height = "300" alt="JDK1.8的ConcurrentHashMap实现和分析" align=center /><br/>
 #### CopyOnWriteArrayList
 - 线程安全的ArrayList
 - Vector和SynchronizedList的锁力度太大，并发效率低，并且迭代的时候无法编辑
@@ -196,17 +198,18 @@
 - 读取完全不用加锁，写入也不会阻塞读的操作，只有写入与写入之间需要进行同步等待--创建副本，读写分离 + "不可变"原理
 - 迭代器数据取决于迭代器生成的时机迭代的数据可能会过期；迭代时可以进行修改(add、put、remove)，不会引发ConcurrentModificationException异常
 - 此类容器缺点：
-  - 1. 数据一致性问题：CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的事实一致性，若希望写入的数据马上能读到切勿使用该容器
-  - 2. 内存占用问题：因为CopyOnWrite的写是复制机制，所以写操作时候，内存里会同时驻扎两个对象的内存
+  - 数据一致性问题：CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的事实一致性，若希望写入的数据马上能读到切勿使用该容器
+  - 内存占用问题：因为CopyOnWrite的写是复制机制，所以写操作时候，内存里会同时驻扎两个对象的内存
 #### BlockingQueue
 - 这是一个接口，表示阻塞队列，非常适合用于作为数据共享的通道
-- 各并发队列关系图
+- 各并发队列关系图<br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%20.png" width = "750" height = "250" alt="阻塞队列与非阻塞队列" align=center /><br/>
 - 阻塞队列是具有阻塞功能的队列，阻塞队列的一端是给生产者放数据用的，另一端是给消费者拿数据用的；阻塞队列是线程安全的
 - 阻塞功能：take()方法若无数据则阻塞直到有数据，put()方法若队列已满则阻塞直到有空闲空间
 - 主要方法：put-take阻塞；add-remove-element异常；offer-poll-peek返回；
   - ArrayBlockingQueue：1.有界，2.公平；
   - LinkedBlockingQueue：1.无界Integer.MAX_VALUE，2.put锁+take锁
-  - PriorityBlockingQueue：1.无界，2.自然排序
+  - PriorityBlockingQueue：1.无界Integer.MAX_VALUE，2.自然排序
   - SynchronousQueue：1.容量0，2.无peek等函数
   - DelayQueue：1.无界，2.时间排序
   - ConcurrentLinkedQueue：1.非阻塞，2.CAS实现
