@@ -198,8 +198,8 @@
 - 读取完全不用加锁，写入也不会阻塞读的操作，只有写入与写入之间需要进行同步等待--创建副本，读写分离 + "不可变"原理
 - 迭代器数据取决于迭代器生成的时机迭代的数据可能会过期；迭代时可以进行修改(add、put、remove)，不会引发ConcurrentModificationException异常
 - 此类容器缺点：
-  - 1. 数据一致性问题：CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的事实一致性，若希望写入的数据马上能读到切勿使用该容器
-  - 2. 内存占用问题：因为CopyOnWrite的写是复制机制，所以写操作时候，内存里会同时驻扎两个对象的内存
+  - 数据一致性问题：CopyOnWrite容器只能保证数据的最终一致性，不能保证数据的事实一致性，若希望写入的数据马上能读到切勿使用该容器
+  - 内存占用问题：因为CopyOnWrite的写是复制机制，所以写操作时候，内存里会同时驻扎两个对象的内存
 #### BlockingQueue
 - 这是一个接口，表示阻塞队列，非常适合用于作为数据共享的通道
 - 各并发队列关系图<br/>
@@ -209,7 +209,7 @@
 - 主要方法：put-take阻塞；add-remove-element异常；offer-poll-peek返回；
   - ArrayBlockingQueue：1.有界，2.公平；
   - LinkedBlockingQueue：1.无界Integer.MAX_VALUE，2.put锁+take锁
-  - PriorityBlockingQueue：1.无界，2.自然排序
+  - PriorityBlockingQueue：1.无界Integer.MAX_VALUE，2.自然排序
   - SynchronousQueue：1.容量0，2.无peek等函数
   - DelayQueue：1.无界，2.时间排序
   - ConcurrentLinkedQueue：1.非阻塞，2.CAS实现
