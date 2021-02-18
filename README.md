@@ -217,3 +217,25 @@
 - 高效的非阻塞并发队列，使用链表实现，可以看做一个线程安全的LinkedList
 #### ConcurrentSkipListMap
 - 是一个Map，使用调表的数据结构进行快速查找
+### 七、控制并发流程
+#### CountDownLatch倒计时门闩
+- CountDownLatch(int count)：仅有一个构造函数，参数count为需要倒数的数值
+- await()：调用await()方法的线程会被挂起，它会等待直到count为0才继续执行
+- countDown()：将count值减1，直到为0时，等待线程会被唤醒
+- 适用场景：一等多，多等一，多等多(不常见)、CountDownLatch不能够重复使用
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/CountDownLatch%201.png" width = "500" height = "400" alt="阻塞队列与非阻塞队列" align=center /><br/>
+#### Semaphore信号量
+- 用来限制或管理数量有限的资源的使用场景
+- new Semaphore(int permits, boolean fair)：如果传入true需要排队等待资源
+- acquire()、acquireUninterruptibly()、tryAcquire()、tryAcquire(int timeout)
+- release()归还许可证
+- 一次性可以获取或释放多个许可证，获取与释放必须一致
+- 获取和释放许可证对线程并无要求，也许是A线程获取B线程释放，逻辑合理即可
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E4%BF%A1%E5%8F%B7%E9%87%8F1.png" width = "600" height = "300" alt="阻塞队列与非阻塞队列" align=center /><br/>
+#### Condition接口(条件对象)
+- 如果说Lock是用来代替synchronized，那么Condition就是用来代替相对应的Object.wait()/notify()
+- await()方法会自动释放持有的锁，调用await()的时候必须先持有锁
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/Condition%E4%BD%9C%E7%94%A8%20.png" width = "500" height = "400" alt="Condition条件接口" align=center /><br/>
+#### CyclicBarrier循环栅栏
+- CountDownLatch用于时间，而CyclicBarrier是用于线程的
+- CountDonwLatch不能重复使用，CyclicBarrier可以重复使用
