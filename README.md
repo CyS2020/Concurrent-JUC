@@ -239,3 +239,5 @@
 #### CyclicBarrier循环栅栏
 - CountDownLatch用于时间，而CyclicBarrier是用于线程的
 - CountDonwLatch不能重复使用，CyclicBarrier可以重复使用
+### 八、AQS原理
+- Semaphore内部有一个Sync类，Sync类继承了AQS，CountDownLatch也是一样
