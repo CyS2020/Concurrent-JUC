@@ -223,7 +223,7 @@
 - await()：调用await()方法的线程会被挂起，它会等待直到count为0才继续执行
 - countDown()：将count值减1，直到为0时，等待线程会被唤醒
 - 适用场景：一等多，多等一，多等多(不常见)、CountDownLatch不能够重复使用
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/CountDownLatch%201.png" width = "500" height = "300" alt="阻塞队列与非阻塞队列" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/CountDownLatch%201.png" width = "500" height = "360" alt="阻塞队列与非阻塞队列" align=center /><br/>
 #### Semaphore信号量
 - 用来限制或管理数量有限的资源的使用场景
 - new Semaphore(int permits, boolean fair)：如果传入true需要排队等待资源
