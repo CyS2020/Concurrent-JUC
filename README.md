@@ -267,3 +267,12 @@
 - 第二步：内部写一个Sync类继承AbstractQueuedSynchronizer
 - 第三步：根据独占来重写里面的tryAcquire/tryRelease，共享来重写tryAcquireShared/tryReleaseShared等方法，在之前的获取/释放中调用它们<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/CountDownLatch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%20.png" width = "400" height = "270" alt="CountDownLatch源码继承关系" align=center /><br/>
+### 九、获取子线程的结果
+#### Runnable不足之处
+- 第一：不能返回一个返回值，第二：不能抛出checked Exception异常
+- Callable接口：V call() throws Exception; 解决了这两个问题
+#### Future类
+- Callable与Future的关系
+  - 可以通过Future.get()来获取Callable接口返回的执行结果，Future.isDone()还能判断任务是否执行结束
+  - 在call()未执行完毕之前，调用get()的线程会被阻塞，直到call()方法返回结果，get()才会得到该结果，然后线程切换到RUNNABLE状态
+  - Future是一个存储器，存储了call()这个任务的结果，任务执行时间无法确定
