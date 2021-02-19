@@ -251,7 +251,7 @@
 #### 控制线程抢锁和配合的FIFO队列
 - 用来存放等待的线程，AQS就是"排队管理器"，当多个线程争用同一把锁时必须有排队机制将那些没拿到锁的线程串在一起，当锁释放时锁管理器就会挑选一个合适的线程来占有这个刚刚释放的锁
 - AQS会维护一个等待线程的队列，把线程都方法到这个队列里(双向链表)<br/>
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%203.png" width = "700" height = "200" alt="等待队列" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%203.png" width = "700" height = "150" alt="等待队列" align=center /><br/>
 #### 期望协作工具类去实现的获取/释放等重要方法
 - 这里获取和释放的方法，需要协作类自己实现，并且含义各不相同
 - 获取方法：依赖于state变量，经常会阻塞(比如获取不到锁的情况)
