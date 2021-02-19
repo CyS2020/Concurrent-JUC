@@ -242,7 +242,7 @@
 ### 八、AQS(AbstractQueuedSynchronizer)原理
 #### AQS介绍
 - Semaphore内部有一个Sync类，Sync类继承了AQS，CountDownLatch也是一样
-- - AQS是一个用于构建锁、同步器、协作工具类的工具类(框架)，有了AQS，构建线程协作类就容易多了<br/>
+- AQS是一个用于构建锁、同步器、协作工具类的工具类(框架)，有了AQS，构建线程协作类就容易多了<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%201.png" width = "400" height = "270" alt="内部实现AQS" align=center /><br/>
 #### state状态
 - 会根据具体实现类的不同而不同
