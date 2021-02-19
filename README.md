@@ -242,7 +242,7 @@
 ### 八、AQS(AbstractQueuedSynchronizer)原理
 #### AQS介绍
 - Semaphore内部有一个Sync类，Sync类继承了AQS，CountDownLatch也是一样<br/>
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%201.png" width = "500" height = "300" alt="内部实现AQS" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%201.png" width = "400" height = "270" alt="内部实现AQS" align=center /><br/>
 - AQS是一个用于构建锁、同步器、协作工具类的工具类(框架)，有了AQS，构建线程协作类就容易多了
 #### state状态
 - 会根据具体实现类的不同而不同
@@ -251,7 +251,7 @@
 #### 控制线程抢锁和配合的FIFO队列
 - 用来存放等待的线程，AQS就是"排队管理器"，当多个线程争用同一把锁时必须有排队机制将那些没拿到锁的线程串在一起，当锁释放时锁管理器就会挑选一个合适的线程来占有这个刚刚释放的锁
 - AQS会维护一个等待线程的队列，把线程都方法到这个队列里(双向链表)<br/>
-<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%203.png" width = "500" height = "300" alt="等待队列" align=center /><br/>
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/AQS%203.png" width = "600" height = "270" alt="等待队列" align=center /><br/>
 #### 期望协作工具类去实现的获取/释放等重要方法
 - 这里获取和释放的方法，需要协作类自己实现，并且含义各不相同
 - 获取方法：依赖于state变量，经常会阻塞(比如获取不到锁的情况)
@@ -266,4 +266,4 @@
 - 第一步：写一个类，想好协作的逻辑，实现获取/释放的方法，内部调用Sync中的方法
 - 第二步：内部写一个Sync类继承AbstractQueuedSynchronizer
 - 第三步：根据独占来重写里面的tryAcquire/tryRelease，共享来重写tryAcquireShared/tryReleaseShared等方法，在之前的获取/释放中调用它们
-- <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/CountDownLatch%201.png" width = "500" height = "300" alt="CountDownLatch源码继承关系" align=center /><br/>
+- <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/CountDownLatch%E6%BA%90%E7%A0%81%E5%88%86%E6%9E%90%20.png" width = "500" height = "300" alt="CountDownLatch源码继承关系" align=center /><br/>
