@@ -271,8 +271,29 @@
 #### Runnable不足之处
 - 第一：不能返回一个返回值，第二：不能抛出checked Exception异常
 - Callable接口：V call() throws Exception; 解决了这两个问题
+- Future + Callable ————治理线程的第二法宝
 #### Future类
 - Callable与Future的关系
   - 可以通过Future.get()来获取Callable接口返回的执行结果，Future.isDone()还能判断任务是否执行结束
   - 在call()未执行完毕之前，调用get()的线程会被阻塞，直到call()方法返回结果，get()才会得到该结果，然后线程切换到RUNNABLE状态
   - Future是一个存储器，存储了call()这个任务的结果，任务执行时间无法确定
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84submit%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9EFuture%E5%AF%B9%E8%B1%A1.png" width = "600" height = "330" alt="线程池的submit方法返回Future对象1" align=center /><br/>
+#### get()获取结果
+- 任务正常完成：get方法会立刻返回结果
+- 任务尚未完成：get将阻塞并直到任务完成(任务还没开始或进行中)
+- 任务执行中抛出Exception：get方法会抛出ExecutionException异常，是call方法执行时产生的，无论call执行时抛出的异常类型是啥，最够get方法抛出的异常都是ExecutionException
+- 任务被取消：get方法会抛出CancellationException
+- 执行任务超时：get方法有一个重载方法，传入延迟时间，时间到了未获得结果抛出TimeoutException；
+#### cancel方法
+- 超时不获取，任务需取消-cancel()
+- 任务还没有开始执行，任务会被正常取消，未来也不会执行，方法返回true
+- 任务已经完成，或者已经取消，cancel()方法会执行失败，方法返回false
+- 如果这个任务已经开始执行了，那么这个取消方法将不会直接取消该任务，取决于cancel入参
+- Future.cancel(true)：任务能够处理interrupt
+- Future.cancel(false)：仅用于避免启动尚未启动的任务
+  - 未能处理interrupt的任务
+  - 不清楚任务是否支持取消
+  - 需要等待已经开始的任务执行完成
+#### FutureTask类
+- 既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值
+<img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84submit%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9EFuture%E5%AF%B9%E8%B1%A12.png" width = "260" height = "240" alt="线程池的submit方法返回Future对象2" align=center /><br/>
