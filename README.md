@@ -274,5 +274,5 @@
 #### Future类
 - Callable与Future的关系
   - 可以通过Future.get()来获取Callable接口返回的执行结果，Future.isDone()还能判断任务是否执行结束
-  - 在call()未执行完毕之前，调用get()的线程会被阻塞，直到call()方法返回结果，get()才会得到该结果，然后线程切换到RUNNABLE状态
+  - 在call()未执行完毕之前，调用get()的线程会被阻塞，直到call()方法返回结果，get()才会得到该结果，然后线程切换到RUNNING状态
   - Future是一个存储器，存储了call()这个任务的结果，任务执行时间无法确定
