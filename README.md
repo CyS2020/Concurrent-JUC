@@ -297,5 +297,12 @@
 #### FutureTask类
 - 既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84submit%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9EFuture%E5%AF%B9%E8%B1%A12.png" width = "260" height = "240" alt="线程池的submit方法返回Future对象2" align=center /><br/>
-### 十、一句话总结
+### 十、总结
+#### JUC的主要内容
 - 线程安全(互斥，非互斥，无锁) + 线程管理 + 线程协作
+#### 实战必会
+- 双线程交替打印奇偶数
+- 生产者消费者模式
+- 3种单例设计模式
+- 哲学家就餐问题模拟死锁
+- 自己实现自旋锁
