@@ -234,7 +234,8 @@
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E4%BF%A1%E5%8F%B7%E9%87%8F1.png" width = "600" height = "300" alt="阻塞队列与非阻塞队列" align=center /><br/>
 #### Condition接口(条件对象)
 - 如果说Lock是用来代替synchronized，那么Condition就是用来代替相对应的Object.wait()/notify()
-- Object.notify()无法唤醒指定线程；使用Lock + Condition 实现唤醒指定的部分线程，或者使用LockSupport唤醒指定线程
+- Object.notify()无法唤醒指定线程；使用Lock + Condition 实现唤醒指定的部分线程，或者使用
+唤醒指定线程
 - await()方法会自动释放持有的锁，调用await()的时候必须先持有锁<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/Condition%E4%BD%9C%E7%94%A8%20.png" width = "500" height = "300" alt="Condition条件接口" align=center /><br/>
 #### CyclicBarrier循环栅栏
@@ -300,7 +301,9 @@
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84submit%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9EFuture%E5%AF%B9%E8%B1%A12.png" width = "260" height = "240" alt="线程池的submit方法返回Future对象2" align=center /><br/>
 ### 十、总结
 #### JUC的主要内容
-- 线程安全(互斥，非互斥，无锁) + 线程管理 + 线程协作
+- 线程安全(互斥，非互斥，无锁)
+- 线程管理(线程池，Future+Callable)
+- 线程协作(wait+notify，lock+condition，LockSupport)
 #### 实战必会
 - 双线程交替打印奇偶数
 - 生产者消费者模式
