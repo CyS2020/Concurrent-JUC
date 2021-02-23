@@ -234,6 +234,7 @@
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E4%BF%A1%E5%8F%B7%E9%87%8F1.png" width = "600" height = "300" alt="阻塞队列与非阻塞队列" align=center /><br/>
 #### Condition接口(条件对象)
 - 如果说Lock是用来代替synchronized，那么Condition就是用来代替相对应的Object.wait()/notify()
+- Object.notify()无法唤醒指定线程；使用Lock + Condition 实现唤醒指定的部分线程，或者使用LockSupport唤醒指定线程
 - await()方法会自动释放持有的锁，调用await()的时候必须先持有锁<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/Condition%E4%BD%9C%E7%94%A8%20.png" width = "500" height = "300" alt="Condition条件接口" align=center /><br/>
 #### CyclicBarrier循环栅栏
