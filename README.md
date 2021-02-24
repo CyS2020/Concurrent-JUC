@@ -52,8 +52,8 @@
 - RUNNING：接收新任务并处理排队任务
 - SHUTDOWN：不接受新任务，但处理排队任务
 - STOP：不接受新任务，也不处理排队任务，中断正在进行的任务
-- TIDYING：所有任务都已终止，workerCount为零时线程会切换到该状态，并允许terminate()钩子方法
-- TERMINATED：terminate()运行完成
+- TIDYING：所有任务都已终止，workerCount为零时线程会切换到该状态，并允许terminated()钩子方法
+- TERMINATED：terminated()运行完成
 ### 二、ThreadLocal
 #### 使用场景
 - 每个线程需要一个独享的对象(通常是工具类，典型需要使用的类有SimpleDateFormat和Random)--重写initialValue()
