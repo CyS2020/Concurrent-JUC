@@ -1,6 +1,5 @@
 package threadpool;
 
-import java.lang.ref.PhantomReference;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
