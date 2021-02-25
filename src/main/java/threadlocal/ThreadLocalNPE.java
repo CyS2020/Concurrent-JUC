@@ -1,7 +1,5 @@
 package threadlocal;
 
-import jdk.nashorn.internal.ir.CallNode;
-
 /**
  * @author: CyS2020
  * @date: 2021/1/31
