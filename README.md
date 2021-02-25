@@ -74,7 +74,7 @@
 #### ThreadLocal基本原理
 - ThreadLocalMap保存在Thread中的，即ThreadLocal与其保存的数据均存放在线程中
 - ThreadLocalMap解决hash冲突的方式是：线性探测法
-- get方法先是取出当前线程的ThreadLocalMap，然后调用map.getEntry方法，把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value<br/>
+- get方法中先是取出当前线程并取出线程的ThreadLocalMap，然后调用map.getEntry方法，把本ThreadLocal的引用即this作为参数传入，取出map中属于本ThreadLocal的value<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/ThreadLocal%E5%8E%9F%E7%90%86%E5%9B%BE.png" width = "600" height = "300" alt="ThreadLocol原理图" align=center /><br/>
 #### ThreadLocal主要方法
 - T initialValue()：初始化
