@@ -84,7 +84,7 @@
 #### ThreadLocal注意点
 - 内存泄漏
   - 调用链：Thread -> ThreadLocalMap -> Entry(key为null) -> value
-  - 正常情况下，当线程终止，线程会被回收，里面的变量也会被回收包括ThreadLocalMap等，但是如果线程不终止(例如线程池)，会有如上调用链，key会被回收所以为null，value则不会<br/>
+  - 正常情况下，当线程终止，线程会被回收，里面的变量也会被回收包括ThreadLocalMap等，但是如果线程不终止(例如线程池)，会有如上调用链，key会被回收所以为null，value则不会；图中的ThreadLocal Ref == Key<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/20180523190740878.png" width = "600" height = "300" alt="ThreadLocol回收原理" align=center /><br/>
 - 空指针异常
   - 在get之前如果不进行初始化，会返回null，注意基本数据类型的装箱拆箱导致空指针异常
