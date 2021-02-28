@@ -285,7 +285,7 @@
 #### get()获取结果
 - 任务正常完成：get方法会立刻返回结果
 - 任务尚未完成：get将阻塞并直到任务完成(任务还没开始或进行中)
-- 任务执行中抛出Exception：get方法会抛出ExecutionException异常，是call方法执行时产生的，无论call执行时抛出的异常类型是啥，最够get方法抛出的异常都是ExecutionException
+- 任务执行中抛出Exception：get方法会抛出ExecutionException异常，是call方法执行时产生的，无论call执行时抛出的异常类型是啥，最终get方法抛出的异常都是ExecutionException
 - 任务被取消：get方法会抛出CancellationException
 - 执行任务超时：get方法有一个重载方法，传入延迟时间，时间到了未获得结果抛出TimeoutException；
 #### cancel方法
@@ -309,6 +309,6 @@
 #### 实战必会
 - 双线程交替打印奇偶数
 - 生产者消费者模式
-- 3种单例设计模式
+- 4种单例设计模式
 - 哲学家就餐问题模拟死锁
 - 自己实现自旋锁
