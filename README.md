@@ -264,7 +264,7 @@
   - 在ReentrantLock里，获取就是lock，state=1，重入的时候state++
 - 释放方法：不会阻塞
   - 在Semaphore中，释放就是release方法，作用是释放一个许可证，state++
-  - 在CountDownLatch里，释放就是countDown方法，作用是"倒数一个数"，state-1
+  - 在CountDownLatch里，释放就是countDown方法，作用是"倒数一个数"，state--
   - 在ReentrantLock里，释放就是unlock(减完后state=0时没有线程占用)，state--
 #### AQS实现用法
 - 第一步：写一个类，想好协作的逻辑，实现获取/释放的方法，内部调用Sync中的方法
