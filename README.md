@@ -220,6 +220,17 @@
 - 高效的非阻塞并发队列，使用链表实现，可以看做一个线程安全的LinkedList
 #### ConcurrentSkipListMap
 - 是一个Map，使用调表的数据结构进行快速查找
+
+|非线程安全容器|线程安全容器|
+|:---:|:---:|
+|ArrayList|CopyOnWriteArrayList|
+|HashSet|CopyOnWriteArraySet|
+|LinkedList|ConcurrentLinkedQueue|
+|HashMap|ConcurrentHashMap|
+|TreeMap|ConcurrentSkipListMap|
+|TreeSet|ConcurrentSkipListSet|
+|Queue|BlockingQueue|
+
 ### 七、控制并发流程
 #### CountDownLatch倒计时门闩
 - CountDownLatch(int count)：仅有一个构造函数，参数count为需要倒数的数值
