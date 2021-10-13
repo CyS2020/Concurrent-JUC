@@ -90,7 +90,7 @@ public class PauseableThreadPool extends ThreadPoolExecutor {
         }
         Thread.sleep(1500);
         pauseableThreadPool.pause();
-        System.out.println("线程池被暂定了");
+        System.out.println("线程池被暂停了");
         Thread.sleep(1500);
         pauseableThreadPool.resume();
         System.out.println("线程池被恢复了");

@@ -19,9 +19,9 @@
 #### 默认线程池
 - newFixedThreadPool：由于传入的LinkedBlockingQueue是没有容量上限的，所以当请求数量越来越多无法及时处理，占用大量内存造成OOM
 - newSingleThreadPool：和上方原理一样，只不过把线程数直接设置为1，所以存在同样的问题，请求堆积时占用大量内存会发生OOM
-- newCachedThreadPool：弊端在于第二个参数最大线程数设置为Integer.MAX_VALUE，这可能回导致创建非常多的线程导致OOM，使用直接交接队列
+- newCachedThreadPool：弊端在于第二个参数最大线程数设置为Integer.MAX_VALUE，这可能回导致创建非常多的线程导致OOM，使用SynchronousQueue
 - newScheduledThreadPool：支持定时及周期性任务执行的线程池，最大线程数为Integer.MAX_VALUE，使用DelayedWorkQueue队列
-- workStealingPool：是jdk1.8加入的，线程中的任务有子任务的时候，拥有窃取能力--窃取子任务队列中的任务
+- newWorkStealingPool：是jdk1.8加入的，线程中的任务有子任务的时候，拥有窃取能力--窃取子任务队列中的任务
 #### 线程池线程数设置多少合适？
 - CPU密集型(加密、计算hash等)：最佳线程数为CPU核心数的1-2倍左右
 - 耗时IO型(读写数据库、文件、网络读写等)：最佳线程数一般会大于cpu核心数的很多倍，以压测为准
@@ -312,7 +312,34 @@
 #### FutureTask类
 - 既可以作为Runnable被线程执行，又可以作为Future得到Callable的返回值<br/>
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E7%9A%84submit%E6%96%B9%E6%B3%95%E8%BF%94%E5%9B%9EFuture%E5%AF%B9%E8%B1%A12.png" width = "260" height = "240" alt="线程池的submit方法返回Future对象2" align=center /><br/>
-### 十、总结
+### 十、CompleteFuture 异步编排
+#### 创建异步对象
+- runAsync(): 无返回值的异步任务, 可以传入指定线程池
+- supplyAsync(): 有返回值的异步任务, 可以传入指定线程池
+#### 完成时回调
+- whenComplete()/whenCompleteAsync(): 回调函数无返回值, 感知异常
+- exceptionally(): 感知异常, 同时处理异常, 可以返回自定义默认值;
+- handle()/handleAsync(): 可以处理异常, 较whenComplete是有返回值的
+#### 线程串行化执行
+- thenApply()/thenApplyAsync(): 需要上一步的执行结果, 有返回值
+- thenAccept()/thenAcceptAsync(): 需要上一步的执行结果, 无返回值
+- thenRun()/thenRunAsync(): 不需要上一步的执行结果, 也无返回值
+#### 两个任务组合--均完成
+- thenCombine()/thenCombineAsync(): 能够达到两个任务的结果, 有返回值
+- thenAcceptBoth()/thenAcceptBoth(): 能够达到两个任务的结果, 无返回值
+- runAfterBoth()/runAfterBothAsync(): 不能够达到两个任务的结果, 也无返回值
+#### 两个任务组合--一个完成
+- applyToEither()/applyToEitherAsync(): 两个任务结果必须是同类型, 有返回值
+- acceptEither()/acceptEitherAsync(): 两个任务结果必须是同类型, 无返回值
+- runAfterEither()/runAfterEitherAsync(): 任务结果无需同一个类型, 也无返回值
+#### 多任务组合
+- allOf(): 全部做完才行, 无返回值
+- anyOf(): 做完一个就行, 返回最先执行结束的结果
+#### Async作用
+- 方法不以Async结尾，意味着Action使用现有线程(或main线程), 不会创建额外线程
+- Async方法若传入线程池会优先使用其他空闲线程, 若没有则使用现有线程
+- Async方法若不传入线程池默认ForkJoinPool线程, 不会优先使用其他线程
+### 十一、总结
 #### JUC的主要内容
 - 线程安全(互斥，非互斥，无锁)
 - 线程管理(线程池，Future+Callable)
