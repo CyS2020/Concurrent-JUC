@@ -339,6 +339,7 @@
 - 方法不以Async结尾，意味着Action使用当前线程(或main线程)
 - Async方法若传入线程池会优先使用其他空闲线程, 若没有则使用当前线程
 - Async方法若不传入线程池默认ForkJoinPool线程, 不会优先使用其他线程
+`https://blog.csdn.net/m0_37450089/article/details/120384296`
 ### 十一、总结
 #### JUC的主要内容
 - 线程安全(互斥，非互斥，无锁)
