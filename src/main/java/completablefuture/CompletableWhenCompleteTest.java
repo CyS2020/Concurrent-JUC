@@ -1,9 +1,9 @@
-package completefuture;
+package completablefuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-import static completefuture.CompleteFutureTest.executorService;
+import static completablefuture.CompletableFutureTest.executorService;
 
 /**
  * @author: CyS2020
@@ -11,7 +11,7 @@ import static completefuture.CompleteFutureTest.executorService;
  * 描述：异步编排测试
  * 实际生产不使用该线程池，使用原生线程池自己创建
  */
-public class CompletionWhenCompleteTest {
+public class CompletableWhenCompleteTest {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         CompletableFuture<Integer> future1 = CompletableFuture.supplyAsync(() -> {

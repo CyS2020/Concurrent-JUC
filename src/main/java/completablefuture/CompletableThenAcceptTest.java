@@ -1,15 +1,15 @@
-package completefuture;
+package completablefuture;
 
 import java.util.concurrent.CompletableFuture;
 
-import static completefuture.CompleteFutureTest.executorService;
+import static completablefuture.CompletableFutureTest.executorService;
 
 /**
  * @author: CyS2020
  * @date: 2021/10/13
  * 描述：异步串行化执行
  */
-public class CompleteThenAcceptTest {
+public class CompletableThenAcceptTest {
 
     public static void main(String[] args) {
         CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {

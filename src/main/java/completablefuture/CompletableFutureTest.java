@@ -1,4 +1,4 @@
-package completefuture;
+package completablefuture;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
  * 描述：演示CompleteFuture
  * 实际生产不使用该线程池，使用原生线程池自己创建
  */
-public class CompleteFutureTest {
+public class CompletableFutureTest {
 
     public static ExecutorService executorService = Executors.newFixedThreadPool(10);
 

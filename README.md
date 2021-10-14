@@ -336,10 +336,10 @@
 - allOf(): 全部做完才行, 无返回值
 - anyOf(): 做完一个就行, 返回最先执行结束的结果
 #### Async作用
-- 方法不以Async结尾，意味着Action使用当前线程(或main线程)
-- Async方法若传入线程池会优先使用其他空闲线程, 若没有则使用当前线程
-- Async方法若不传入线程池默认ForkJoinPool线程, 不会优先使用其他线程
-`https://blog.csdn.net/m0_37450089/article/details/120384296`
+- 方法以Async结尾异步执行; 方法不以Async结尾同步执行,意味着Action使用当前线程(或main线程)
+- Async方法若传入线程池会优先使用其他空闲线程(线程会创建), 若没有则使用当前线程
+- Async方法若不传入线程池默认使用ForkJoinPool线程池中的守护线程执行, 不会优先使用其他线程
+- 以上规则在allOf()与anyOf()组合中有体现, 具体事例参考CompletableAsyncTest实例
 ### 十一、总结
 #### JUC的主要内容
 - 线程安全(互斥，非互斥，无锁)
