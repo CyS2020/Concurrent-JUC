@@ -338,7 +338,7 @@
 #### Async作用
 - 方法以Async结尾异步执行; 方法不以Async结尾同步执行,意味着Action使用当前线程(或main线程)
 - Async方法若传入线程池会优先使用其他空闲线程(线程会创建), 若没有则使用当前线程
-- Async方法若不传入线程池默认使用ForkJoinPool线程池中的守护线程执行, 不会优先使用其他线程
+- Async方法若不传入线程池默认使用ForkJoinPool线程池中的守护线程执行, 且维持当前线程而不会优先使用其他线程
 - 以上规则在allOf()与anyOf()组合中有体现, 具体事例参考CompletableAsyncTest实例
 ### 十一、总结
 #### JUC的主要内容
