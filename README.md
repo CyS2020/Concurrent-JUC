@@ -219,7 +219,7 @@
 #### ConcurrentLinkedQueue
 - 高效的非阻塞并发队列，使用链表实现，可以看做一个线程安全的LinkedList
 #### ConcurrentSkipListMap
-- 是一个Map，使用调表的数据结构进行快速查找
+- 是一个Map，使用跳表的数据结构进行快速查找
 
 |非线程安全容器|线程安全容器|
 |:---:|:---:|
