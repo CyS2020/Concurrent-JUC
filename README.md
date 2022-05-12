@@ -210,7 +210,7 @@
 <img src="https://github.com/CyS2020/Concurrent-JUC/blob/main/src/main/resources/%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%E5%92%8C%E9%9D%9E%E9%98%BB%E5%A1%9E%E9%98%9F%E5%88%97%20.png" width = "750" height = "250" alt="阻塞队列与非阻塞队列" align=center /><br/>
 - 阻塞队列是具有阻塞功能的队列，阻塞队列的一端是给生产者放数据用的，另一端是给消费者拿数据用的；阻塞队列是线程安全的
 - 阻塞功能：take()方法若无数据则阻塞直到有数据，put()方法若队列已满则阻塞直到有空闲空间
-- 主要方法：put-take阻塞；add-remove-element异常；offer-poll-peek返回；
+- 主要方法：put-take阻塞；add-remove-element异常；offer-poll-peek忽略并返回false；
   - ArrayBlockingQueue：1.有界，2.公平；
   - LinkedBlockingQueue：1.无界Integer.MAX_VALUE，2.put锁+take锁
   - PriorityBlockingQueue：1.无界Integer.MAX_VALUE，2.自然排序
