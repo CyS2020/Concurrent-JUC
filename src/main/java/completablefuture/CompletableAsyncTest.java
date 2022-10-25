@@ -41,6 +41,8 @@ public class CompletableAsyncTest {
                 .collect(Collectors.toList());
         CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]));
 
+        Thread.sleep(9000);
+
         executorService.shutdown();
     }
 
